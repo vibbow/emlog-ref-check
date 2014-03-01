@@ -1,7 +1,7 @@
 <?php
 /*
 * Plugin Name: CSRF保护脚本
-* Version: 1.1
+* Version: 1.2
 * Description: 防止跨站请求伪造攻击
 * Author: vibbow
 * Author Email: vibbow@gmail.com
@@ -18,7 +18,7 @@ if (pathinfo($_SERVER['SCRIPT_FILENAME'], PATHINFO_BASENAME) != 'index.php') {
 }
 
 function ref_check() {
-	$referer_url = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+	$referer_url = isset($_SERVER['HTTP_REFERER']) ? filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL) : NULL;
 
 	//如果POST提交没有任何来源，则直接拒绝
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($referer_url)) {
